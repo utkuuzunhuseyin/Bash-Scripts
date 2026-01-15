@@ -45,7 +45,7 @@ for file in "$LOG_DIR"/*.log; do
 
   # Check if the command was successful
   if [ $? -eq 0 ]; then
-    echo "[$timestamp] Success: $file archived. Original replaced with $file.gz."
+    echo "[$timestamp] Success: $file archived. Original replaced with $file.gz"
   else
     echo "[$timestamp] Error: Failed to archive $file."
   fi
