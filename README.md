@@ -27,6 +27,8 @@ Clone this repository to your local machine to access the scripts.
 git clone [https://github.com/utkuuzunhuseyin/bash-scripts.git]
 cd Bash-Scripts
 ```
+---
+
 ### 2. Make Scripts Executable
 By default, scripts might not have execution permissions after cloning. You must grant permission before running them.
 ```bash
@@ -36,6 +38,7 @@ Or for a specific script:
 ```bash
 chmod +x log_compressor.sh
 ```
+---
 
 ### 3. Usage
 To run a script, simply execute it from the terminal.
@@ -61,6 +64,8 @@ Example Usage (log_compressor.sh): In this example, /var/log is the first argume
 ```bash
 ./log_compressor.sh /var/log
 ```
+---
+
 ### 🤝 Contributing
 Contributions are welcome! If you have a script that solves a common problem or want to improve an existing one:
 
@@ -71,6 +76,8 @@ Contributions are welcome! If you have a script that solves a common problem or 
 3- Commit your changes.
 
 4- Push to the branch and open a Pull Request.
+
+---
 
 ### 👤 Author
 
