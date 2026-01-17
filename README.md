@@ -14,6 +14,7 @@ Each script in this repository is **self-contained**. This means you don't need 
 | Script Name | Description |
 | :--- | :--- |
 | `log_compressor.sh` | Scans a directory for `.log` files and compresses them using `gzip`. |
+| `backup.sh` | Automates directory backup with logging and 7-day retention policy.Creates a .tar.gz archive of the source directory. |
 | `...` | *More scripts will be added over time.* |
 
 ---
