@@ -3,7 +3,7 @@
 # ==============================================================================
 # Script Name: backup.sh
 # Description: Automates directory backup with logging and 7-day retention policy.
-#              Creates a .tar.gz archive of the source directory.
+#              Creates a *.tar.gz archive of the source directory.
 # Author: Utku Uzunhüseyin / GitHub: utkuuzunhuseyin
 # Date: 2026-01-18
 # ==============================================================================
