@@ -36,13 +36,13 @@ log_file="$destination_directory/backup_log.txt"
 # Check if the source directory exists
 if [ ! -d "$source_directory" ];then
     echo "Source directory does not exist: $source_directory"
-    exit 1
+    exit 2
 fi
 
 # Check for read permissions on source directory (Root check bypasses this)
 if [ ! -r "$source_directory" ] && [ "$EUID" -ne 0 ]; then
     echo "Error: You don't have permission to read '$source_directory'. Try running with sudo."
-    exit 1
+    exit 3
 fi
 
 # Check if the destination directory exists; create if missing
@@ -51,14 +51,14 @@ if [ ! -d "$destination_directory" ]; then
     mkdir -p "$destination_directory"  
     if [ $? -ne 0 ]; then
         echo "Error: Failed to create destination directory '$destination_directory'. Check permissions."
-        exit 1
+        exit 4
     fi
 fi
 
 # Check for write permissions on destination directory (Root check bypasses this)
 if [ ! -w "$destination_directory" ] && [ "$EUID" -ne 0 ]; then
     echo "Error: You don't have permission to write to '$destination_directory'. Try running with sudo."
-    exit 1
+    exit 5
 fi
 
 # Create the backup and log the process
@@ -77,7 +77,7 @@ if [ $? -eq 0 ]; then
 else
     # Log the failure if the backup command failed
     echo "$(date '+%Y-%m-%d %H:%M:%S') - Error: Backup creation failed." >> "$log_file"
-    exit 1
+    exit 6
 fi
 
 
