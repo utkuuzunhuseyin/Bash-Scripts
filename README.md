@@ -11,8 +11,6 @@ Each script in this repository is **self-contained**. This means you don't need 
 
 ### 📜 List of Scripts
 
-### 📜 List of Scripts
-
 | Script Name | Description |
 | :--- | :--- |
 | `log_compressor.sh` | Scans a directory for `.log` files and compresses them using `gzip`. |
