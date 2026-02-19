@@ -1,17 +1,43 @@
 #!/bin/bash
 
+# ==============================================================================
+# Script Name: update_script.sh
+# Description: Detects the Linux distribution and automatically runs the 
+#              appropriate system update/upgrade commands. Logs the process 
+#              and any errors. Requires root privileges.
+# Author: Utku Uzunhüseyin / GitHub: utkuuzunhuseyin
+# Date: 2026-02-19
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Usage Guide:
+# 1. Give execution permission: chmod +x update_script.sh
+# 2. Run the script with root privileges.
+#
+# Note: The script automatically detects your Linux distribution (Ubuntu, CentOS,
+#       Debian, etc.) and runs the appropriate commands. You do not need to 
+#       provide any arguments; just execute it with root privileges.
+#
+# Syntax:  sudo ./update_script.sh
+# Example: sudo ./update_script.sh
+# ------------------------------------------------------------------------------
+
+# Define log files and current timestamp
 log_file="./updater.log"
 error_log="./updater_errors.log"
 timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 
+# Check for root privileges (Required for system updates)
 if [ "$EUID" -ne 0 ]; then
   echo "Error: Please run this script as root or using sudo"
   echo "Usage: sudo ./update_script.sh"
   exit 1 
 fi
 
+# Source the os-release file to detect the Linux distribution
 [ -f /etc/os-release ] && . /etc/os-release || { echo "Error: Could not source os-release file"; exit 2; }
 
+# Execute package manager update/upgrade commands based on the detected OS
 case "$ID" in
     ubuntu|debian|kali)
         echo "[$timestamp] Detected Linux distribution: $ID. Starting update process..." >> $log_file
@@ -36,8 +62,10 @@ case "$ID" in
         ;;
 esac
 
+# Define timestamp for the end of the process
 end_timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 
+# Check if the update process was successful and output the result
 if [ $? -eq 0 ]; then
     echo "[$end_timestamp] Update completed successfully!"
     echo "Check $log_file for details."
