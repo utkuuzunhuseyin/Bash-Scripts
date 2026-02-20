@@ -41,8 +41,7 @@ timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Check if the log directory exists; create if missing
 if [ ! -d "$log_dir" ]; then
-  mkdir -p "$log_dir"
-  if [ $? -ne 0 ]; then
+  if ! mkdir -p "$log_dir"; then
       echo "Error: Failed to create log directory at $log_dir. Please check permissions."
       exit 3
   fi
@@ -50,8 +49,7 @@ fi
 
 # Check if the log file exists; create if missing
 if [ ! -f "$log_file" ]; then
-  touch "$log_file"
-  if [ $? -ne 0 ]; then
+  if ! touch "$log_file"; then
       echo "Error: Failed to create log file at $log_file. Please check permissions."
       exit 4
   fi
@@ -69,10 +67,8 @@ else
   echo "[$timestamp] Alert: $service_arg is not active." >> "$log_file"
   echo "[$timestamp] Action: Attempting to restart $service_arg..." >> "$log_file"
 
-  systemctl restart "$service_arg"
-
   # Check if the restart command was successful
-  if [ $? -eq 0 ]; then
+  if systemctl restart "$service_arg"; then
     echo "[$timestamp] Success: Successfully restarted $service_arg." >> "$log_file"
     exit 0
   else

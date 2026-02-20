@@ -35,7 +35,12 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Source the os-release file to detect the Linux distribution
-[ -f /etc/os-release ] && . /etc/os-release || { echo "Error: Could not source os-release file"; exit 2; }
+if [ -f /etc/os-release ]; then
+  . /etc/os-release
+else
+  echo "Error: Could not source os-release file"
+  exit 2
+fi
 
 # Execute package manager update/upgrade commands based on the detected OS
 case "$ID" in
@@ -62,11 +67,13 @@ case "$ID" in
         ;;
 esac
 
+update_status=$?
+
 # Define timestamp for the end of the process
 end_timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Check if the update process was successful and output the result
-if [ $? -eq 0 ]; then
+if [ $update_status -eq 0 ]; then
     echo "[$end_timestamp] Update completed successfully!"
     echo "Check $log_file for details."
 else

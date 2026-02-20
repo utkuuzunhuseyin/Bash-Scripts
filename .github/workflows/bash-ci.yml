@@ -17,4 +17,4 @@ jobs:
 
       - name: Scriptleri Test Et
         
-        run: shellcheck *.sh
+        run: shellcheck -e SC1091 *.sh

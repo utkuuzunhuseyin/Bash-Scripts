@@ -36,19 +36,16 @@ for file in "$LOG_DIR"/*.log; do
   [ -e "$file" ] || continue
   
   echo "Processing: $file" 
-  
-  # Compress the file (gzip automatically removes the original file)
-  gzip "$file" 2>/dev/null
 
   # Get current timestamp for the log message
   timestamp=$(date '+%Y-%m-%d %H:%M:%S')
 
-  # Check if the command was successful
-  if [ $? -eq 0 ]; then
+   # Compress the file (gzip automatically removes the original file)
+  if gzip "$file" 2>/dev/null; then 
     echo "[$timestamp] Success: $file archived. Original replaced with $file.gz"
   else
     echo "[$timestamp] Error: Failed to archive $file."
   fi
-
+  
   echo "----------------------------------------"
 done
